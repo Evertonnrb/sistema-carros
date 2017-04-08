@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      template="template.xhtml">
+  
+        <!--        <h:form>
+                    <p:panelGrid columns="2">
+        
+                        <h:outputLabel for="nome" value="Nome"/>
+                        <p:inputText id="nome" size="20" maxlength="18" value="#{nomesBean.nome}"/>
+        
+                        <h:outputLabel for="sobrenome" value="Sobrenome"/>
+                        <p:inputText id="sobrenome" size="20" maxlength="18" value="#{nomesBean.sobrenome}" />
+        
+                        <h:outputLabel/>
+                        <p:commandButton value="Enviar a porra toda" action="#{nomesBean.dizerHola()}" update="msg"/>
+                        
+                        <h:outputText id="msg" value="#{nomesBean.msg}" />
+                    </p:panelGrid>    
+                </h:form>-->
+        <h:form id="frm">
+            <p:toolbar>
+                <p:toolbarGroup align="left">    
+                <p:commandButton value="Adicionar" action="#{carroBean.adicionar()}" update=":frm"></p:commandButton>
+                <p:commandButton value="Listar" action="#{carroBean.listar()}" update=":frm"></p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:fieldset legend="Carros">
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Modelo"></h:outputLabel>
+                    <p:inputText value="#{carroBean.carro.modelo}"></p:inputText>
+                    <h:outputLabel value="Fabricante"></h:outputLabel>
+                    <p:inputText value="#{carroBean.carro.fabricante}"></p:inputText>
+                    <h:outputLabel value="Cor"></h:outputLabel>
+                    <p:inputText value="#{carroBean.carro.cor}"></p:inputText>
+                    <h:outputLabel value="Ano" ></h:outputLabel>
+                    <p:inputMask mask="9999" value="#{carroBean.carro.ano}"></p:inputMask>
+                </p:panelGrid>
+               <!--Criando uma tabela para listar os carros-->
+               <p:dataTable value="#{carroBean.carros}" var="carro" emptyMessage="Nenhum carro encontrado">
+                   <!--Editar -->
+                   <p:column>
+                       <p:commandButton value="Editar" action="#{carroBean.editar(carros)}" update="@form"></p:commandButton>
+                   </p:column>
+                   <p:column headerText="Modelo:" sortBy="#{carro.modelo}">
+                        <h:outputText value="#{carro.modelo}"></h:outputText>
+                    </p:column>
+                   <p:column headerText="Fabricante:">
+                       <h:outputText value="#{carro.fabricante}"></h:outputText>
+                   </p:column>
+                   <p:column headerText="Cor:">
+                       <h:outputText value="#{carro.cor}"></h:outputText>
+                   </p:column>
+                   <p:column headerText="Ano">
+                       <!--<p:calendar value="#{carro.ano}" readonly="true"></p:calendar>-->
+                       <h:outputText value="#{carro.ano}"></h:outputText>
+                   </p:column>
+                    
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+</ui:decorate>
+
